@@ -42,18 +42,19 @@ while True:
     if event == 'Ok':
         combo = values['combo']  # use the combo key
         code = values['code']
-        num1 = country_codes.index(code)
-        num2 = country_codes.index(combo)
-        print(num1)
-        print(num2)
-        convert1 = rates[int(num1)]
-        convert2 = rates[int(num2)]
-        calnum1 = convert1.replace(',','.')
-        calnum2 = convert2.replace(',','.')
-        print(calnum1)
-        print(calnum2)
-        print((float(calnum1) / 100) * (100 / float(calnum2)))
-        window['-TEXT-'].update((float(calnum1) / 100) * (100 / float(calnum2)) * float(values['input']))
+        try:
+            num1 = country_codes.index(code)
+            num2 = country_codes.index(combo)
+            convert1 = rates[int(num1)]
+            convert2 = rates[int(num2)]
+            calnum1 = convert1.replace(',','.')
+            calnum2 = convert2.replace(',','.')
+        except:
+            sg.popup('Du skal huske at vælge country codes')
+        try:
+            window['-TEXT-'].update((float(calnum1) / 100) * (100 / float(calnum2)) * float(values['input']))
+        except:
+            sg.popup('dit input skal være et tal')
         
 
 # Finish up by removing from the screen
